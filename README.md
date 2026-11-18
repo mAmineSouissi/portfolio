@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mohamed Amine Souissi · Portfolio
 
-## Getting Started
+**Live:** https://portfolio-psi-one-11.vercel.app
 
-First, run the development server:
+The portfolio of a full-stack developer from Tunisia, built as a working IDE instead of a page.
+
+## What's inside
+
+- **IDE workspace.** It has a title bar with file tabs, a sidebar explorer and a status bar. Every section is a "file".
+- **Real windows.** Drag them by the title bar. The traffic lights reset, minimize and maximize.
+- **Live demos inside the page.** Projects run in an embedded browser, so you can scroll and click the real sites without leaving the portfolio.
+- **Architecture walkthrough.** Scrolling plays a request through each system, edge by edge, until every route is covered.
+- **Command palette.** Press `⌘K` / `Ctrl K` to jump to files and projects, open the résumé or copy the email.
+- **Terminal contact.** A real prompt with real commands. Type `help`.
+- **Token hunt.** Five hidden tokens unlock a generated collectible card, shown in 3D where WebGL allows.
+- **Cinematic preloader.** Greetings in thirteen languages, starting with Tunisian Arabic.
+
+## Stack
+
+| Area | Tools |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack) and React 19 |
+| Language and styles | TypeScript and Tailwind CSS v4 |
+| Animation | GSAP, plus a small vanilla scroll engine (`public/scrollcraft`) |
+| 3D | three.js via react-three-fiber and drei |
+| Hosting | Vercel, with Vercel Analytics |
+
+## Run it locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
+yarn dev     # http://localhost:3000
+yarn build   # production build
+yarn lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/app/              layout, page, OG image, sitemap, robots
+src/components/acts/  one component per section (about, work, architecture…)
+src/components/surface/  IDE chrome: windows, palette, sidebar, overlays
+src/components/hunt/  token hunt and the collectible card
+src/lib/              content (data.ts, systems.ts), stores, helpers
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All content lives in `src/lib/data.ts` and `src/lib/systems.ts`.
 
-## Learn More
+## Contact
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+aminesouissi682@gmail.com · [GitHub](https://github.com/mAmineSouissi)
