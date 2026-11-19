@@ -1,6 +1,6 @@
 "use client";
 
-import { experience, type Experience } from "@/lib/data";
+import { certifications, experience, type Experience } from "@/lib/data";
 import { techFilterStore, useStore } from "@/lib/store";
 import TechList from "@/components/ui/TechList";
 import Token from "@/components/hunt/Token";
@@ -54,6 +54,23 @@ export default function CareerAct() {
               <Line key={job.company} job={job} genesis={i === experience.length - 1} />
             ))}
           </ol>
+          <ul className="px-4 pb-4 sm:px-7">
+            {certifications.map((c) => (
+              <li key={c.url} className="grid gap-x-5 gap-y-1 border-b border-[var(--sc-hairline)] py-5 last:border-0 sm:grid-cols-[6.5rem_1fr]">
+                <p className="mono text-[0.85rem]">
+                  <span className="t-num block">{c.date}</span>
+                  <span className="t-str">CERT</span>
+                </p>
+                <p className="min-w-0">
+                  <span className="text-lg font-bold">{c.title}</span>{" "}
+                  <span className="text-[var(--sc-ink-soft)]">by</span> <span className="text-[var(--sc-accent)]">{c.issuer}</span>
+                  <a href={c.url} target="_blank" rel="noreferrer" className="mono ml-3 text-[0.8rem] text-[var(--sc-ink-soft)] underline-offset-4 hover:text-[var(--sc-ink)] hover:underline">
+                    verify ↗
+                  </a>
+                </p>
+              </li>
+            ))}
+          </ul>
         </Window>
       </div>
     </section>

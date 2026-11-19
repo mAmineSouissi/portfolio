@@ -282,6 +282,15 @@ export const awards = [
   },
 ];
 
+export const certifications = [
+  {
+    title: "Fundamentals of Deep Learning",
+    issuer: "NVIDIA Deep Learning Institute",
+    date: "2026-11",
+    url: "https://learn.nvidia.com/certificates?id=g1mMWL3gQiObw_-tPdKIhA",
+  },
+];
+
 export const files = [
   { id: "about", name: "about.md", commit: "init: Mohamed Amine Souissi, full-stack dev" },
   { id: "work", name: "work.tsx", commit: "feat(work): three products live in production" },
