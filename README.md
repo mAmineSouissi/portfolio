@@ -1,6 +1,6 @@
 # Mohamed Amine Souissi · Portfolio
 
-**Live:** https://portfolio-psi-one-11.vercel.app
+**Live:** https://mohamedaminesouissi.vercel.app
 
 The portfolio of a full-stack developer from Tunisia, built as a working IDE instead of a page.
 
