@@ -264,7 +264,7 @@
     inset: 0;
     border-radius: inherit;
     background: inherit;
-    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) 4; /* finite: an endless loop keeps the GPU redrawing an idle page */
   }
 
   .dim-filtered {
@@ -273,7 +273,7 @@
   }
 
   .token-coin {
-    animation: coin-bob 3.2s ease-in-out infinite;
+    animation: coin-bob 3.2s ease-in-out 3;
   }
 
   .grain {
@@ -362,12 +362,6 @@
 .wipe-in {
   animation: wipe-in 0.42s var(--sc-ease-out);
 }
-@keyframes caret {
-  50% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hot-dot::after,
   .token-coin,
