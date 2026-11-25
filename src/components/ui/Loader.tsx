@@ -5,24 +5,16 @@ import { gsap } from "@/lib/gsap";
 
 /** Greeting the visitor from home first, then the rest of the world. */
 const GREETINGS = [
-  { text: "عسلامة", locale: "aeb-TN", lang: "aeb" },
-  { text: "Aslema", locale: "aeb-Latn", lang: "aeb-Latn" },
-  { text: "مرحبا", locale: "ar", lang: "ar" },
-  { text: "Bonjour", locale: "fr", lang: "fr" },
-  { text: "Hello", locale: "en", lang: "en" },
-  { text: "Hola", locale: "es", lang: "es" },
-  { text: "Ciao", locale: "it", lang: "it" },
-  { text: "Hallo", locale: "de", lang: "de" },
-  { text: "Olá", locale: "pt", lang: "pt" },
-  { text: "Merhaba", locale: "tr", lang: "tr" },
-  { text: "こんにちは", locale: "ja", lang: "ja" },
-  { text: "你好", locale: "zh", lang: "zh" },
-  { text: "Привет", locale: "ru", lang: "ru" },
+  { text: "عسلامة", lang: "aeb" },
+  { text: "Bonjour", lang: "fr" },
+  { text: "Hello", lang: "en" },
+  { text: "Hola", lang: "es" },
+  { text: "こんにちは", lang: "ja" },
 ];
-/* How long each greeting holds: slow in, quick through the middle, slow out. */
-const HOLDS = [0.5, 0.32, 0.22, 0.16, 0.12, 0.1, 0.1, 0.1, 0.11, 0.14, 0.18, 0.24, 0.34];
-const IN = 0.55;
-const OUT = 0.45;
+/* Even, unhurried rhythm: fast swaps read as flicker, not as cinema. */
+const HOLD = 0.4;
+const IN = 0.65; // longer than HOLD, so each word dissolves into the next
+const OUT = 0.4; // <= HOLD keeps two words on screen at most; HOLD + OUT >= IN so an arrival never outlives its exit
 
 export default function Loader() {
   const root = useRef<HTMLDivElement>(null);
@@ -58,30 +50,22 @@ export default function Loader() {
     });
 
     // opening: the frame breathes in from black
-    tl.fromTo(el, { "--lift": 0 }, { "--lift": 1, duration: 0.9, ease: "sine.inOut" }, 0);
-    tl.fromTo(chrome, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power2.out", stagger: 0.08 }, 0.15);
+    tl.fromTo(el, { "--lift": 0 }, { "--lift": 1, duration: 1.2, ease: "sine.inOut" }, 0);
+    tl.fromTo(chrome, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.1);
+    tl.call(setCode(`<span class="t-key">const</span> hello = <span class="t-fn">greet</span>(<span class="t-str">"world"</span>);`), [], 0.2);
 
     // greetings: each rises out of a blur and dissolves upward as the next arrives
-    let t = 0.35;
+    let t = 0.3;
     words.forEach((w, k) => {
-      const g = GREETINGS[k];
-      tl.call(setCode(`<span class="t-key">i18n</span>.<span class="t-fn">greet</span>(<span class="t-str">"${g.locale}"</span>)`), [], t);
       tl.fromTo(
         w,
-        { autoAlpha: 0, yPercent: 35, filter: "blur(14px)", scale: 0.98 },
-        // arrival always finishes inside its own hold, so it can never fight the exit
-        { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", scale: 1, duration: Math.min(IN, HOLDS[k]), ease: "expo.out" },
+        { autoAlpha: 0, yPercent: 18, filter: "blur(8px)" },
+        { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", duration: IN, ease: "power2.out" },
         t
       );
-      const outAt = t + HOLDS[k];
+      t += HOLD;
       if (k < words.length - 1) {
-        // never longer than the next greeting's hold, so at most two words share the frame
-        const out = Math.min(OUT, HOLDS[k + 1] * 0.95);
-        tl.to(w, { autoAlpha: 0, yPercent: -30, filter: "blur(10px)", duration: out, ease: "power2.in" }, outAt);
-        // the next greeting starts rising while this one dissolves: a crossfade, never a cut
-        t = outAt;
-      } else {
-        t = outAt;
+        tl.to(w, { autoAlpha: 0, yPercent: -14, filter: "blur(8px)", duration: OUT, ease: "power2.inOut" }, t);
       }
     });
     const greetEnd = t;
@@ -92,37 +76,37 @@ export default function Loader() {
       prog,
       {
         v: 100,
-        duration: greetEnd - 0.35,
+        duration: greetEnd - 0.3,
         ease: "power1.inOut",
         onUpdate: () => {
           count.textContent = String(Math.round(prog.v)).padStart(3, "0");
           bar.style.transform = `scaleX(${prog.v / 100})`;
         },
       },
-      0.35
+      0.3
     );
 
     // the name: last greeting melts away, the name rises from behind a mask and settles
     const last = words[words.length - 1];
-    tl.to(last, { autoAlpha: 0, yPercent: -30, filter: "blur(10px)", duration: OUT, ease: "power2.in" }, greetEnd);
+    tl.to(last, { autoAlpha: 0, yPercent: -14, filter: "blur(8px)", duration: OUT, ease: "power2.inOut" }, greetEnd);
     tl.call(setCode(`<span class="t-key">return</span> <span class="t-str">"welcome"</span>;`), [], greetEnd + 0.15);
     tl.set(name, { autoAlpha: 1 }, greetEnd + 0.2);
     tl.fromTo(
       nameInner,
       { yPercent: 110, filter: "blur(12px)", letterSpacing: "0.06em" },
-      { yPercent: 0, filter: "blur(0px)", letterSpacing: "-0.035em", duration: 1.15, ease: "expo.out" },
+      { yPercent: 0, filter: "blur(0px)", letterSpacing: "-0.035em", duration: 0.8, ease: "expo.out" },
       greetEnd + 0.2
     );
 
     // exit: hold, then a slow curtain lifts the whole frame away
-    tl.addLabel("exit", greetEnd + 1.25);
+    tl.addLabel("exit", greetEnd + 0.85);
     tl.to(name, { yPercent: -12, autoAlpha: 0, filter: "blur(6px)", duration: 0.7, ease: "power2.inOut" }, "exit");
     tl.to(chrome, { autoAlpha: 0, duration: 0.5, ease: "power2.in" }, "exit");
     tl.fromTo(
       el,
       { clipPath: "inset(0% 0% 0% 0%)" },
-      { clipPath: "inset(0% 0% 100% 0%)", duration: 1.05, ease: "expo.inOut" },
-      "exit+=0.2"
+      { clipPath: "inset(0% 0% 100% 0%)", duration: 0.8, ease: "expo.inOut" },
+      "exit+=0.15"
     );
 
     const skip = () => {
@@ -164,7 +148,7 @@ export default function Loader() {
         <div className="relative grid h-[clamp(4rem,13vw,10rem)] w-full place-items-center">
           {GREETINGS.map((g) => (
             <span
-              key={g.locale}
+              key={g.lang}
               data-greet
               lang={g.lang}
               dir="auto"
