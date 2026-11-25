@@ -73,7 +73,7 @@ export default function AboutAct() {
             <span className="gutter" aria-hidden>7</span>
             <p>
               <span className="t-key">- </span>
-              <span className="t-fn">open_to</span>: <span className="t-str">full-stack and mobile roles</span>
+              <span className="t-fn">open_to</span>: <span className="t-str">full-time roles + PFE internship (2026–27)</span>
             </p>
             <span className="gutter" aria-hidden>8</span>
             <p>
@@ -110,7 +110,7 @@ export default function AboutAct() {
                   <div>
                     <p className="text-lg font-bold leading-tight">{profile.name}</p>
                     <p className="mt-1 flex items-center gap-2 text-[var(--sc-ink-soft)]">
-                      <span className="hot-dot" aria-hidden /> Open to work · {profile.role}
+                      <span className="hot-dot" aria-hidden /> Open to full-time & PFE
                     </p>
                   </div>
                 </div>

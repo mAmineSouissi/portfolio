@@ -18,7 +18,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 // what search results and link previews show; the UI keeps the short tagline
-const description = `Full-stack developer in Tunisia building NestJS APIs, Next.js web apps and React Native mobile apps. Open to work. ${profile.tagline}.`;
+const description = `Full-stack developer in Tunisia building NestJS APIs, Next.js web apps and React Native mobile apps. Open to full-time roles and a final-year internship (PFE). ${profile.tagline}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

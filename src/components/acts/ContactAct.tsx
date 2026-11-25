@@ -69,7 +69,7 @@ function run(raw: string): ReactNode | "clear" {
     case "whoami":
       return (
         <span>
-          {profile.name} · {profile.role} · {profile.location} · {experience.length} roles since 2023 · open to work
+          {profile.name} · {profile.role} · {profile.location} · {experience.length} roles since 2023 · open to full-time roles and a PFE (2026–27)
         </span>
       );
     case "tokens": {
