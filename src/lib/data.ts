@@ -14,7 +14,7 @@ export const profile = {
   avatar: "/avatar.png",
   socials: [
     { platform: "GitHub", url: "https://github.com/mAmineSouissi" },
-    { platform: "LinkedIn", url: "https://linkedin.com/in/mAmineSoussi" },
+    { platform: "LinkedIn", url: "https://www.linkedin.com/in/mohamed-amine-souissi-109044293/" },
     { platform: "Email", url: "mailto:aminesouissi682@gmail.com" },
   ],
   languages: [
@@ -58,6 +58,19 @@ export const projects: Project[] = [
     status: "live",
     liveUrl: "https://www.ktrait-konstruction.com/",
     image: "/projects/ktrait.jpg",
+    featured: true,
+  },
+  {
+    title: "MoveUp",
+    category: "Moving platform",
+    year: "2026",
+    summary: "Tunisian moving platform: one request, vetted movers, a tracked job from quote to keys.",
+    description:
+      "Clients submit one structured request, compare quotes from vetted movers and follow the move live; movers quote and report progress; staff run a back office for validation, disputes and assignments. JWT auth with rotating refresh tokens, AI-assisted claims, live tracking on maps, bilingual EN/FR. Team project: I led development (75 of 128 commits).",
+    tech: ["Next.js", "TypeScript", "MongoDB", "React Query", "Zustand", "GSAP"],
+    status: "live",
+    liveUrl: "https://moveuptn.vercel.app/",
+    image: "/projects/moveup.jpg",
     featured: true,
   },
   {
@@ -293,7 +306,7 @@ export const certifications = [
 
 export const files = [
   { id: "about", name: "about.md", commit: "init: Mohamed Amine Souissi, full-stack dev" },
-  { id: "work", name: "work.tsx", commit: "feat(work): three products live in production" },
+  { id: "work", name: "work.tsx", commit: "feat(work): six products live in production" },
   { id: "architecture", name: "architecture.ts", commit: "feat(arch): trace one request end to end" },
   { id: "career", name: "career.log", commit: "docs(career): five teams since 2023" },
   { id: "stack", name: "stack.json", commit: "chore(stack): tools, counted from real projects" },

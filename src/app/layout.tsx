@@ -17,10 +17,13 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// what search results and link previews show; the UI keeps the short tagline
+const description = `Full-stack developer in Tunisia building NestJS APIs, Next.js web apps and React Native mobile apps. Open to work. ${profile.tagline}.`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: `${profile.name} · ${profile.role}`,
-  description: profile.tagline,
+  description,
   keywords: [
     "Mohamed Amine Souissi",
     "Full-Stack Developer",
@@ -33,9 +36,10 @@ export const metadata: Metadata = {
     "Tunisia",
   ],
   authors: [{ name: profile.name }],
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${profile.name} · ${profile.role}`,
-    description: profile.tagline,
+    description,
     url: siteUrl,
     siteName: profile.name,
     type: "website",
@@ -43,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${profile.name} · ${profile.role}`,
-    description: profile.tagline,
+    description,
   },
 };
 
@@ -91,6 +95,21 @@ export default function RootLayout({
         <div className="grain" aria-hidden />
         {children}
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: profile.name,
+              jobTitle: profile.role,
+              url: siteUrl,
+              email: profile.email,
+              address: { "@type": "PostalAddress", addressCountry: "TN" },
+              sameAs: profile.socials.filter((s) => s.platform !== "Email").map((s) => s.url),
+            }),
+          }}
+        />
       </body>
     </html>
   );
